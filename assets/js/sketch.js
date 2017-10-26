@@ -1,6 +1,8 @@
 var player;
 var asteroidLimit = 5;
 var asteroids = [];
+var fontFamily;
+var paused = false;
 
 // User Defined Functions
 function checkAsteroidsAreDead(asteroid) {
@@ -8,13 +10,25 @@ function checkAsteroidsAreDead(asteroid) {
 }
 
 function gameOver() {
-	alert('game over');
-	resetGame();
+	push();
+	fill(255);
+	textAlign(CENTER);
+	text("Game Over", width / 2, height / 4);
+	textSize(18);
+	text("Press [space] to reset game", width / 2, height / 2);
+	pop();
+	paused = true;
 }
 
 function winner() {
-	alert('you win!');
-	resetGame();
+	push();
+	fill(255);
+	textAlign(CENTER);
+	text("You Won!", width / 2, height / 4);
+	textSize(18);
+	text("Press [space] to reset game", width / 2, height / 2);
+	pop();
+	paused = true;
 }
 
 function resetGame() {
@@ -23,6 +37,7 @@ function resetGame() {
 	asteroids = [];
 	player.missiles = [];
 	generateAsteroids();
+	paused = false;
 }
 
 function generateAsteroids() {
@@ -33,8 +48,14 @@ function generateAsteroids() {
 }
 // End User Defined Functions
 
+function preload() {
+	fontFamily = loadFont('assets/font/PressStart2P-Regular.ttf');
+}
+
 function setup() {
-	createCanvas(700, 450);
+	createCanvas(window.innerWidth, window.innerHeight);
+	textSize(24);
+	textFont(fontFamily);
 	player = new Player();
 	generateAsteroids();
 }
@@ -59,22 +80,28 @@ function draw() {
 			}
 		}
 	}
+	if (asteroids.every(checkAsteroidsAreDead) && player.lives > 0) {
+		winner();
+	}
 	if (player.lives === 0) {
 		gameOver();
 	}
-	if (asteroids.every(checkAsteroidsAreDead)) {
-		alert('you win');
-		winner();
+	if ( ! paused) {
+		push();
+		fill(255);
+		text(player.lives, 40, 40);
+		pop();
+	} else {
+		asteroids = [];
 	}
-	push();
-	fill(255);
-	textSize(24);
-	text(player.lives, 40, 40);
-	pop();
 }
 
 function keyPressed() {
 	if (keyCode === 32) {
-		player.shoot();
+		if (paused) {
+			resetGame();
+		} else {
+			player.shoot();
+		}
 	}
 }

@@ -86,7 +86,6 @@ function Asteroid(element) {
 			asteroid.pos = createVector(this.pos.x, this.pos.y);
 			asteroid.velocity = createVector(random(this.velocity.x-1, this.velocity.x+1), random(this.velocity.y-1, this.velocity.y+1));
 			asteroids.push(asteroid);
-			console.log(asteroid);
 		}
 
 	}
