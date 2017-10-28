@@ -59,6 +59,7 @@ function Player() {
 	}
 
 	this.shoot = function() {
+		audio.shoot();
 		var missile = new Missile();
 		missile.heading = this.heading - (PI / 2);
 		this.missiles.push(missile);

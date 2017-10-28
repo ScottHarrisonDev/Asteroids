@@ -3,6 +3,8 @@ var asteroidLimit = 5;
 var asteroids = [];
 var fontFamily;
 var paused = false;
+var audio = new Audio();
+var audioPlayed = false;
 
 // User Defined Functions
 function checkAsteroidsAreDead(asteroid) {
@@ -10,6 +12,10 @@ function checkAsteroidsAreDead(asteroid) {
 }
 
 function gameOver() {
+	if ( ! audioPlayed) {
+		audio.gameOver();
+		audioPlayed = true;
+	}
 	push();
 	fill(255);
 	textAlign(CENTER);
@@ -21,6 +27,10 @@ function gameOver() {
 }
 
 function winner() {
+	if ( ! audioPlayed) {
+		audio.winner();
+		audioPlayed = true;
+	}
 	push();
 	fill(255);
 	textAlign(CENTER);
@@ -38,6 +48,7 @@ function resetGame() {
 	player.missiles = [];
 	generateAsteroids();
 	paused = false;
+	audioPlayed = false;
 }
 
 function generateAsteroids() {
