@@ -46,10 +46,7 @@ function Asteroid(element) {
 	}
 
 	this.crash = function(target) {
-		if ((this.pos.x + this.radius) > (target.pos.x - target.radius) &&
-			(this.pos.y + this.radius) > (target.pos.y - target.radius) &&
-			(this.pos.x - this.radius) < (target.pos.x + target.radius) &&
-			(this.pos.y - this.radius) < (target.pos.y + target.radius)) {
+		if (dist(this.pos.x,this.pos.y,target.pos.x, target.pos.y) < (target.radius + this.radius)) {
 			if (this.isColliding === 0) {
 				this.isColliding = 1;
 				player.removeLife();
@@ -60,10 +57,7 @@ function Asteroid(element) {
 	}
 
 	this.hit = function(target) {
-		if ((this.pos.x + this.radius) > (target.pos.x - target.radius) &&
-			(this.pos.y + this.radius) > (target.pos.y - target.radius) &&
-			(this.pos.x - this.radius) < (target.pos.x + target.radius) &&
-			(this.pos.y - this.radius) < (target.pos.y + target.radius)) {
+		if (dist(this.pos.x,this.pos.y,target.pos.x, target.pos.y) < (target.radius + this.radius)) {
 			switch (this.radius) {
 				case 50:
 				case 35:
