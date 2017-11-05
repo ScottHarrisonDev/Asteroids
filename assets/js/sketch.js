@@ -45,6 +45,7 @@ function winner() {
 function resetGame() {
 	player.reset();
 	player.lives = 3;
+	player.points = 0;
 	asteroids = [];
 	player.missiles = [];
 	generateAsteroids();
@@ -117,7 +118,8 @@ function draw() {
 	if ( ! paused && ! start) {
 		push();
 		fill(255);
-		text(player.lives, 40, 40);
+		text('Lives: ' + player.lives, 40, 40);
+		text('Points: ' + player.points, 40, 80);
 		pop();
 	} else {
 		asteroids = [];

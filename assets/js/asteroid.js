@@ -67,6 +67,7 @@ function Asteroid(element) {
 					this.destroy();
 					break;
 			}
+			player.points++;
 			return true;
 		}
 		return false;
